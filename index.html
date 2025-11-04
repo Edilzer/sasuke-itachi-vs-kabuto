@@ -83,6 +83,40 @@
       display: none;
     }
 
+    /* --- BOTÓN PLAY --- */
+    .play-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90px;
+      height: 90px;
+      background: rgba(255, 0, 0, 0.75);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 20px crimson;
+    }
+
+    .play-btn::before {
+      content: "";
+      position: absolute;
+      left: 37%;
+      width: 0;
+      height: 0;
+      border-top: 16px solid transparent;
+      border-bottom: 16px solid transparent;
+      border-left: 25px solid white;
+    }
+
+    .play-btn:hover {
+      transform: translate(-50%, -50%) scale(1.1);
+      background: rgba(255, 0, 0, 0.9);
+      box-shadow: 0 0 35px red;
+    }
+
     /* --- BOTÓN DESCARGA --- */
     .descargar {
       display: inline-block;
@@ -158,6 +192,13 @@
       .descargar { font-size: 1rem; padding: 10px 25px; }
       .video-container { width: 95%; }
       iframe { height: 250px; }
+      .play-btn { width: 70px; height: 70px; }
+      .play-btn::before {
+        left: 38%;
+        border-top: 12px solid transparent;
+        border-bottom: 12px solid transparent;
+        border-left: 18px solid white;
+      }
     }
   </style>
 </head>
@@ -169,6 +210,7 @@
 
   <div class="video-container" id="videoBox">
     <img src="miniatura.jpg" alt="Miniatura del video" class="miniatura" id="previewImg">
+    <div class="play-btn" id="playBtn"></div>
     <iframe id="videoFrame" src="https://drive.google.com/file/d/14x7s1JzE1PBbisns-0FwOsyTmGQB2vgh/preview" allow="autoplay; fullscreen"></iframe>
   </div>
 
@@ -179,14 +221,20 @@
   </footer>
 
   <script>
-    // Al hacer clic en la miniatura, mostrar el video
-    document.getElementById('videoBox').addEventListener('click', function() {
-      const img = document.getElementById('previewImg');
-      const iframe = document.getElementById('videoFrame');
+    // Mostrar el video al hacer clic en la miniatura o el botón
+    const videoBox = document.getElementById('videoBox');
+    const img = document.getElementById('previewImg');
+    const iframe = document.getElementById('videoFrame');
+    const playBtn = document.getElementById('playBtn');
+
+    videoBox.addEventListener('click', () => {
       img.style.display = 'none';
+      playBtn.style.display = 'none';
       iframe.style.display = 'block';
     });
   </script>
 
 </body>
 </html>
+
+
